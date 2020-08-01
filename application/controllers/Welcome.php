@@ -20,7 +20,7 @@ class Welcome extends MY_Controller {
 	 */
 	public function index()
 	{
-		$this->page->setTitle('Welcome to SPK university');
+		$this->page->setTitle('Welcome to SPK Perusahaan');
 		loadPage('layouts/index');
 	}
 }

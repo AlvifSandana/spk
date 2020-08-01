@@ -68,7 +68,7 @@
     <div class="row">
         <div class="form-group">
             <a href="<?php echo site_url('universitas/tambah') ?>" type="button" class="btn btn-primary">Tambah
-                Universitas</a>
+                Perusahaan</a>
         </div>
 
     </div>

@@ -25,6 +25,7 @@ class Universitas extends MY_Controller
     {
         $data['universitas'] = $this->MUniversitas->getAll();
         loadPage('universitas/index', $data);
+        // $this->load->view('universitas/index', $data);
     }
 
     public function tambah($id = null)
