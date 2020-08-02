@@ -231,7 +231,7 @@
                         <div class="alert alert-success" role="alert">
                             <h4><b>Kesimpulan : </b> Dari hasil perhitungan yang dilakukan menggunakan metode SAW
                                 universitas terbaik untuk di pilih adalah
-                                <?php echo $value->Universitas ?> dengan nilai <?php echo $value->Total ?>
+                                <?php echo $value->Perusahaan ?> dengan nilai <?php echo $value->Total ?>
                             </h4>
                         </div>
                         <?php

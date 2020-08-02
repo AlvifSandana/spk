@@ -6,9 +6,9 @@
     <div class="row">
         <div class="errors">
             <?php
-        //    dump($nilaiUniversitas);
+        //    dump($nilaiPerusahaan);
         //    dump($dataView);
-        //    foreach ($nilaiUniversitas as $item => $value) {
+        //    foreach ($nilaiPerusahaan as $item => $value) {
         //        echo $value->nilai;
         //    }
             $errors = $this->session->flashdata('errors');
@@ -28,9 +28,9 @@
             <div class="panel-body">
                 <div class="form-inline">
                     <div class="form-group">
-                        <label for="universitas">Nama Perusahaan</label>
-                        <input name="universitas" type="text" class="form-control" id="universitas"
-                               value="<?php echo isset($nilaiUniversitas[0]->universitas) ? $nilaiUniversitas[0]->universitas : ''?>"
+                        <label for="perusahaan">Nama Perusahaan</label>
+                        <input name="perusahaan" type="text" class="form-control" id="perusahaan"
+                               value="<?php echo isset($nilaiPerusahaan[0]->perusahaan) ? $nilaiPerusahaan[0]->perusahaan : ''?>"
                                placeholder="nama perusahaan">
                     </div>
                 </div>
@@ -57,8 +57,8 @@
                             <input type="radio" name="nilai[<?php echo $dataItem->kdKriteria ?>]"
                                    value="<?php echo $dataItem->value ?>"
                                     <?php
-                                    if(isset($nilaiUniversitas)){
-                                        foreach ($nilaiUniversitas as $item => $value) {
+                                    if(isset($nilaiPerusahaan)){
+                                        foreach ($nilaiPerusahaan as $item => $value) {
                                             if($value->kdKriteria == $dataItem->kdKriteria){
                                                 if($value->nilai ==  $dataItem->value){
                                                     ?>
@@ -92,7 +92,7 @@
         <div class="pull-right">
             <div class="col-md-12">
                 <button class="btn btn-primary" type="submit">Save</button>
-                <a class="btn btn-danger" href="<?php site_url('universitas') ?>" role="button">Batal</a>
+                <a class="btn btn-danger" href="<?php site_url('perusahaan') ?>" role="button">Batal</a>
 
             </div>
         </div>

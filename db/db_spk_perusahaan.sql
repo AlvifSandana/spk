@@ -54,7 +54,7 @@ INSERT INTO `kriteria` (`kdKriteria`, `kriteria`, `sifat`, `bobot`) VALUES
 --
 
 CREATE TABLE `nilai` (
-  `kdUniversitas` int(11) NOT NULL,
+  `kdPerusahaan` int(11) NOT NULL,
   `kdKriteria` int(11) NOT NULL,
   `nilai` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -63,7 +63,7 @@ CREATE TABLE `nilai` (
 -- Dumping data untuk tabel `nilai`
 --
 
-INSERT INTO `nilai` (`kdUniversitas`, `kdKriteria`, `nilai`) VALUES
+INSERT INTO `nilai` (`kdPerusahaan`, `kdKriteria`, `nilai`) VALUES
 (4, 3, 5),
 (4, 5, 4),
 (4, 6, 4),
@@ -138,16 +138,16 @@ INSERT INTO `subkriteria` (`kdSubKriteria`, `subKriteria`, `value`, `kdKriteria`
 -- Struktur dari tabel `universitas`
 --
 
-CREATE TABLE `universitas` (
-  `kdUniversitas` int(11) NOT NULL,
-  `universitas` varchar(50) NOT NULL
+CREATE TABLE `perusahaan` (
+  `kdPerusahaan` int(11) NOT NULL,
+  `perusahaan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `universitas`
 --
 
-INSERT INTO `universitas` (`kdUniversitas`, `universitas`) VALUES
+INSERT INTO `perusahaan` (`kdPerusahaan`, `perusahaan`) VALUES
 (4, 'univ A'),
 (5, 'univ B'),
 (6, 'univ C');
@@ -166,7 +166,7 @@ ALTER TABLE `kriteria`
 -- Indeks untuk tabel `nilai`
 --
 ALTER TABLE `nilai`
-  ADD UNIQUE KEY `indexNilai` (`kdUniversitas`,`kdKriteria`) USING BTREE,
+  ADD UNIQUE KEY `indexNilai` (`kdPerusahaan`,`kdKriteria`) USING BTREE,
   ADD KEY `kdKriteria` (`kdKriteria`);
 
 --
@@ -179,8 +179,8 @@ ALTER TABLE `subkriteria`
 --
 -- Indeks untuk tabel `universitas`
 --
-ALTER TABLE `universitas`
-  ADD PRIMARY KEY (`kdUniversitas`);
+ALTER TABLE `perusahaan`
+  ADD PRIMARY KEY (`kdPerusahaan`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -201,8 +201,8 @@ ALTER TABLE `subkriteria`
 --
 -- AUTO_INCREMENT untuk tabel `universitas`
 --
-ALTER TABLE `universitas`
-  MODIFY `kdUniversitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `perusahaan`
+  MODIFY `kdPerusahaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -212,7 +212,7 @@ ALTER TABLE `universitas`
 -- Ketidakleluasaan untuk tabel `nilai`
 --
 ALTER TABLE `nilai`
-  ADD CONSTRAINT `nilai_ibfk_1` FOREIGN KEY (`kdUniversitas`) REFERENCES `universitas` (`kdUniversitas`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `nilai_ibfk_1` FOREIGN KEY (`kdPerusahaan`) REFERENCES `perusahaan` (`kdPerusahaan`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `nilai_ibfk_2` FOREIGN KEY (`kdKriteria`) REFERENCES `kriteria` (`kdKriteria`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --

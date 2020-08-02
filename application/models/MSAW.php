@@ -19,7 +19,7 @@ class MSAW extends CI_Model{
     public function createTable($field)
     {
         $fields = array(
-            'Universitas VARCHAR(120) not null'
+            'Perusahaan VARCHAR(120) not null'
         );
 
 

@@ -6,22 +6,22 @@
  * Time: 15:51
  */
 
-class MUniversitas extends CI_Model{
+class MPerusahaan extends CI_Model{
 
-    public $kdUniversitas;
-    public $universitas;
+    public $kdPerusahaan;
+    public $perusahaan;
 
     public function __construct(){
         parent::__construct();
     }
 
     private function getTable(){
-        return 'universitas';
+        return 'perusahaan';
     }
 
     private function getData(){
         $data = array(
-            'universitas' => $this->universitas
+            'perusahaan' => $this->perusahaan
         );
 
         return $data;
@@ -29,14 +29,14 @@ class MUniversitas extends CI_Model{
 
     public function getAll()
     {
-        $universitas = array();
+        $perusahaan = array();
         $query = $this->db->get($this->getTable());
         if($query->num_rows() > 0){
             foreach ($query->result() as $row) {
-                $universitas[] = $row;
+                $perusahaan[] = $row;
             }
         }
-        return $universitas;
+        return $perusahaan;
     }
 
 
@@ -55,13 +55,13 @@ class MUniversitas extends CI_Model{
 
     public function delete($id)
     {
-        $this->db->where('kdUniversitas', $id);
+        $this->db->where('kdPerusahaan', $id);
         return $this->db->delete($this->getTable());
     }
 
     public function getLastID(){
-        $this->db->select('kdUniversitas');
-        $this->db->order_by('kdUniversitas', 'DESC');
+        $this->db->select('kdPerusahaan');
+        $this->db->order_by('kdPerusahaan', 'DESC');
         $this->db->limit(1);
         $query = $this->db->get($this->getTable());
         return $query->row();

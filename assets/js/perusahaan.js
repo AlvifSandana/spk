@@ -2,9 +2,9 @@
  * Created by sankester on 14/05/2017.
  */
 
-function hapus_universitas(id){
+function hapus_perusahaan(id){
     $.ajax({
-        url :  base_url + "universitas/" + "delete/"+id,
+        url :  base_url + "perusahaan/" + "delete/"+id,
         type : "POST",
         dataType : "JSON",
         success : function(data){

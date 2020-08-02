@@ -44,12 +44,12 @@
                             ><a href="<?php echo site_url('kriteria');?>">Kriteria</a></li>
                             <li
                             <li
-                                <?php if( $this->uri->segment(1) == 'universitas'){
+                                <?php if( $this->uri->segment(1) == 'perusahaan'){
                                     ?>
                                     class="active"
                                     <?php
                                 }?>
-                            ><a href="<?php echo site_url('universitas');?>">Perusahaan</a></li>
+                            ><a href="<?php echo site_url('perusahaan');?>">Perusahaan</a></li>
                             <li
                                 <?php if( $this->uri->segment(1) == 'rangking'){
                                     ?>

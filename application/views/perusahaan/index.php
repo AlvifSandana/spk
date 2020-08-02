@@ -30,18 +30,18 @@
                         <tbody>
                         <?php
                         $no = 1;
-                        if (isset($universitas)) {
-                            if(count($universitas) == 0){
+                        if (isset($perusahaan)) {
+                            if(count($perusahaan) == 0){
                                 echo '<tr><td colspan="3" class="text-center"><h3>No Data Input</h3></td></tr>';
                             }
-                            foreach ($universitas as $item) {
+                            foreach ($perusahaan as $item) {
                                 ?>
                                 <tr>
                                     <td><?php echo $no++ ?></td>
-                                    <td><?php echo $item->universitas ?></td>
+                                    <td><?php echo $item->perusahaan ?></td>
                                     <td>
                                         <a class="btn btn-primary btn-xs"
-                                           href="<?php echo site_url('universitas/tambah/' . $item->kdUniversitas) ?>"
+                                           href="<?php echo site_url('perusahaan/tambah/' . $item->kdPerusahaan) ?>"
                                            role="button">
                                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Ubah
                                         </a>
@@ -67,7 +67,7 @@
 
     <div class="row">
         <div class="form-group">
-            <a href="<?php echo site_url('universitas/tambah') ?>" type="button" class="btn btn-primary">Tambah
+            <a href="<?php echo site_url('perusahaan/tambah') ?>" type="button" class="btn btn-primary">Tambah
                 Perusahaan</a>
         </div>
 
@@ -89,7 +89,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-danger"
-                        onclick="hapus_universitas(<?php echo $item->kdUniversitas; ?>)">
+                        onclick="hapus_perusahaan(<?php echo $item->kdPerusahaan; ?>)">
                     Hapus
                 </button>
             </div>

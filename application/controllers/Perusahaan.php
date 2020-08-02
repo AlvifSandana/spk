@@ -8,7 +8,7 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Universitas extends MY_Controller
+class Perusahaan extends MY_Controller
 {
     public function __construct()
     {
@@ -16,16 +16,16 @@ class Universitas extends MY_Controller
         $this->page->setTitle('Perusahaan');
         $this->load->model('MKriteria');
         $this->load->model('MSubKriteria');
-        $this->load->model('MUniversitas');
+        $this->load->model('MPerusahaan');
         $this->load->model('MNilai');
-        $this->page->setLoadJs('assets/js/universitas');
+        $this->page->setLoadJs('assets/js/perusahaan');
     }
 
     public function index()
     {
-        $data['universitas'] = $this->MUniversitas->getAll();
-        loadPage('universitas/index', $data);
-        // $this->load->view('universitas/index', $data);
+        $data['perusahaan'] = $this->MPerusahaan->getAll();
+        loadPage('perusahaan/index', $data);
+        // $this->load->view('perusahaan/index', $data);
     }
 
     public function tambah($id = null)
@@ -33,22 +33,22 @@ class Universitas extends MY_Controller
 
         if ($id == null) {
             if (count($_POST)) {
-                $this->form_validation->set_rules('universitas', '', 'trim|required');
+                $this->form_validation->set_rules('perusahaan', '', 'trim|required');
                 if ($this->form_validation->run() == false) {
                     $errors = $this->form_validation->error_array();
                     $this->session->set_flashdata('errors', $errors);
                     redirect(current_url());
                 } else {
 
-                    $universitas = $this->input->post('universitas');
+                    $perusahaan = $this->input->post('perusahaan');
                     $nilai = $this->input->post('nilai');
 
-                    $this->MUniversitas->universitas = $universitas;
-                    if ($this->MUniversitas->insert() == true) {
+                    $this->MPerusahaan->perusahaan = $perusahaan;
+                    if ($this->MPerusahaan->insert() == true) {
                         $success = false;
-                        $kdUniversitas = $this->MUniversitas->getLastID()->kdUniversitas;
+                        $kdPerusahaan = $this->MPerusahaan->getLastID()->kdPerusahaan;
                         foreach ($nilai as $item => $value) {
-                            $this->MNilai->kdUniversitas = $kdUniversitas;
+                            $this->MNilai->kdPerusahaan = $kdPerusahaan;
                             $this->MNilai->kdKriteria = $item;
                             $this->MNilai->nilai = $value;
                             if ($this->MNilai->insert()) {
@@ -57,7 +57,7 @@ class Universitas extends MY_Controller
                         }
                         if ($success == true) {
                             $this->session->set_flashdata('message', 'Berhasil menambah data :)');
-                            redirect('universitas');
+                            redirect('perusahaan');
                         } else {
                             echo 'gagal';
                         }
@@ -66,22 +66,22 @@ class Universitas extends MY_Controller
                 //-----
             }else{
                 $data['dataView'] = $this->getDataInsert();
-                loadPage('universitas/tambah', $data);
+                loadPage('perusahaan/tambah', $data);
             }
         }else{
             if(count($_POST)){
-                $kdUniversitas = $this->uri->segment(3, 0);
-                dump($kdUniversitas);
-                if($kdUniversitas > 0){
-                    $universitas = $this->input->post('universitas');
+                $kdPerusahaan = $this->uri->segment(3, 0);
+                dump($kdPerusahaan);
+                if($kdPerusahaan > 0){
+                    $perusahaan = $this->input->post('perusahaan');
                     $nilai = $this->input->post('nilai');
-                    $where = array('kdUniversitas' => $kdUniversitas);
-                    $this->MUniversitas->universitas = $universitas;
-                    dump($universitas);
-                    if($this->MUniversitas->update($where) == true){
+                    $where = array('kdPerusahaan' => $kdPerusahaan);
+                    $this->MPerusahaan->perusahaan = $perusahaan;
+                    dump($perusahaan);
+                    if($this->MPerusahaan->update($where) == true){
                         $success = false;
                         foreach ($nilai as $item => $value) {
-                            $this->MNilai->kdUniversitas = $kdUniversitas;
+                            $this->MNilai->kdPerusahaan = $kdPerusahaan;
                             $this->MNilai->kdKriteria = $item;
                             $this->MNilai->nilai = $value;
                             if ($this->MNilai->update()) {
@@ -90,7 +90,7 @@ class Universitas extends MY_Controller
                         }
                         if ($success == true) {
                             $this->session->set_flashdata('message', 'Berhasil mengubah data :)');
-                            redirect('universitas');
+                            redirect('perusahaan');
                         } else {
                             echo 'gagal';
                         }
@@ -98,8 +98,8 @@ class Universitas extends MY_Controller
                 }
             }
             $data['dataView'] = $this->getDataInsert();
-            $data['nilaiUniversitas'] = $this->MNilai->getNilaiByUniveristas($id);
-            loadPage('universitas/tambah', $data);
+            $data['nilaiPerusahaan'] = $this->MNilai->getNilaiByUniveristas($id);
+            loadPage('perusahaan/tambah', $data);
         }
 
     }
@@ -122,7 +122,7 @@ class Universitas extends MY_Controller
     public function delete($id)
     {
         if($this->MNilai->delete($id) == true){
-            if($this->MUniversitas->delete($id) == true){
+            if($this->MPerusahaan->delete($id) == true){
                 $this->session->set_flashdata('message','Berhasil menghapus data :)');
                 echo json_encode(array("status" => 'true'));
             }

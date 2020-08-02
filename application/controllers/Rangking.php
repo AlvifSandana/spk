@@ -15,16 +15,16 @@ class Rangking extends MY_Controller
         parent::__construct();
         $this->load->model('MKriteria');
         $this->load->model('MNilai');
-        $this->load->model('MUniversitas');
+        $this->load->model('MPerusahaan');
         $this->load->model('MSAW');
         $this->page->setTitle('Rangking');
     }
 
     public function index()
     {
-        $universitas = $this->MUniversitas->getAll();
+        $perusahaan = $this->MPerusahaan->getAll();
 
-        if($universitas == null){
+        if($perusahaan == null){
             redirect('rangking/noData');
         }
         /**
@@ -46,7 +46,7 @@ class Rangking extends MY_Controller
         /**
          * Ambil data dari table SAW untuk perhitungan awal
          */
-        $table1 = $this->initialTableSAW($universitas);
+        $table1 = $this->initialTableSAW($perusahaan);
         $this->page->setData('table1', $table1);
 
 
@@ -106,16 +106,16 @@ class Rangking extends MY_Controller
     {
         loadPage('saw/noData');
     }
-    private function initialTableSAW($universitas)
+    private function initialTableSAW($perusahaan)
     {
         $nilai = $this->MNilai->getNilaiUniveristas();
 
         $dataInput = array();
         $no = 0;
-        foreach ($universitas as $item => $itemUniversitas) {
+        foreach ($perusahaan as $item => $itemPerusahaan) {
             foreach ($nilai as $index => $itemNilai) {
-                if ($itemUniversitas->kdUniversitas == $itemNilai->kdUniversitas) {
-                    $dataInput[$no]['universitas'] = $itemUniversitas->universitas;
+                if ($itemPerusahaan->kdPerusahaan == $itemNilai->kdPerusahaan) {
+                    $dataInput[$no]['perusahaan'] = $itemPerusahaan->perusahaan;
                     $dataInput[$no][$itemNilai->kriteria] = $itemNilai->nilai;
                 }
             }
@@ -134,7 +134,7 @@ class Rangking extends MY_Controller
         $dataSifat = array();
         foreach ($sawData as $item => $value) {
             foreach ($value as $x => $z) {
-                if ($x == 'Universitas') {
+                if ($x == 'Perusahaan') {
                     continue;
                 }
                 $dataSifat[$x] = $this->MSAW->getStatus($x);
@@ -149,7 +149,7 @@ class Rangking extends MY_Controller
         $dataValueMinMax = array();
         foreach ($sawData as $point => $value) {
             foreach ($value as $x => $z) {
-                if ($x == 'Universitas') {
+                if ($x == 'Perusahaan') {
                     continue;
                 }
                 foreach ($dataSifat as $item => $itemX) {
@@ -185,7 +185,7 @@ class Rangking extends MY_Controller
         $sawData = $this->MSAW->getAll();
         foreach ($sawData as $point => $value) {
             foreach ($value as $x => $z) {
-                if ($x == 'Universitas') {
+                if ($x == 'Perusahaan') {
                     continue;
                 }
                 foreach ($dataSifat as $item => $sifat) {
@@ -198,7 +198,7 @@ class Rangking extends MY_Controller
                             );
                             $where = array(
 
-                                'Universitas' => $value->Universitas
+                                'Perusahaan' => $value->Perusahaan
                             );
 
                             $this->MSAW->update($dataUpdate, $where);
@@ -209,7 +209,7 @@ class Rangking extends MY_Controller
                             );
                             $where = array(
 
-                                'Universitas' => $value->Universitas
+                                'Perusahaan' => $value->Perusahaan
                             );
 
                             $this->MSAW->update($dataUpdate, $where);
@@ -229,7 +229,7 @@ class Rangking extends MY_Controller
         foreach ($sawData as $item => $value) {
             $total = 0;
             foreach ($value as $item => $itemData) {
-                if($item == 'Universitas'){
+                if($item == 'Perusahaan'){
                     continue;
                 }elseif($item == 'Total'){
                     $dataUpdate = array(
@@ -237,7 +237,7 @@ class Rangking extends MY_Controller
                     );
 
                     $where = array(
-                        'Universitas' => $value->Universitas
+                        'Perusahaan' => $value->Perusahaan
                     );
 
                     $this->MSAW->update($dataUpdate, $where);
@@ -254,7 +254,7 @@ class Rangking extends MY_Controller
         $sawData = $this->MSAW->getAll();
         foreach ($sawData as $point => $value) {
             foreach ($value as $x => $z) {
-                if ($x == 'Universitas') {
+                if ($x == 'Perusahaan') {
                     continue;
                 }
                 foreach ($bobot as $item => $itemKriteria) {
@@ -267,7 +267,7 @@ class Rangking extends MY_Controller
                             $x => $newData
                         );
                         $where = array(
-                            'Universitas' => $value->Universitas
+                            'Perusahaan' => $value->Perusahaan
                         );
 
                         $this->MSAW->update($dataUpdate, $where);
@@ -289,7 +289,7 @@ class Rangking extends MY_Controller
                 'Rangking' => $no
             );
             $where = array(
-                'Universitas' => $value->Universitas
+                'Perusahaan' => $value->Perusahaan
             );
 
             $this->MSAW->update($dataUpdate, $where);

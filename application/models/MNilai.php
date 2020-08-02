@@ -8,7 +8,7 @@
  */
 class MNilai extends CI_Model{
 
-    public $kdUniversitas;
+    public $kdPerusahaan;
     public $kdKriteria;
     public $nilai;
 
@@ -24,7 +24,7 @@ class MNilai extends CI_Model{
     private function getData()
     {
         $data = array(
-            'kdUniversitas' => $this->kdUniversitas,
+            'kdPerusahaan' => $this->kdPerusahaan,
             'kdKriteria' => $this->kdKriteria,
             'nilai' => $this->nilai
         );
@@ -41,7 +41,7 @@ class MNilai extends CI_Model{
     public function getNilaiByUniveristas($id)
     {
         $query = $this->db->query(
-            'select u.kdUniversitas, u.universitas, k.kdKriteria, n.nilai from universitas u, nilai n, kriteria k, subkriteria sk where u.kdUniversitas = n.kdUniversitas AND k.kdKriteria = n.kdKriteria and k.kdKriteria = sk.kdKriteria and u.kdUniversitas = '.$id.' GROUP by k.kdKriteria'
+            'select u.kdPerusahaan, u.perusahaan, k.kdKriteria, n.nilai from perusahaan u, nilai n, kriteria k, subkriteria sk where u.kdPerusahaan = n.kdPerusahaan AND k.kdKriteria = n.kdKriteria and k.kdKriteria = sk.kdKriteria and u.kdPerusahaan = '.$id.' GROUP by k.kdKriteria'
         );
         if($query->num_rows() > 0){
             foreach ($query->result() as $row) {
@@ -55,7 +55,7 @@ class MNilai extends CI_Model{
     public function getNilaiUniveristas()
     {
         $query = $this->db->query(
-            'select u.kdUniversitas, u.universitas, k.kdKriteria, k.kriteria ,n.nilai from universitas u, nilai n, kriteria k where u.kdUniversitas = n.kdUniversitas AND k.kdKriteria = n.kdKriteria '
+            'select u.kdPerusahaan, u.perusahaan, k.kdKriteria, k.kriteria ,n.nilai from perusahaan u, nilai n, kriteria k where u.kdPerusahaan = n.kdPerusahaan AND k.kdKriteria = n.kdKriteria '
         );
         if($query->num_rows() > 0){
             foreach ($query->result() as $row) {
@@ -69,7 +69,7 @@ class MNilai extends CI_Model{
     public function update()
     {
         $data = array('nilai' => $this->nilai);
-        $this->db->where('kdUniversitas', $this->kdUniversitas);
+        $this->db->where('kdPerusahaan', $this->kdPerusahaan);
         $this->db->where('kdKriteria', $this->kdKriteria);
         $this->db->update($this->getTable(), $data);
         return $this->db->affected_rows();
@@ -77,7 +77,7 @@ class MNilai extends CI_Model{
 
     public function delete($id)
     {
-        $this->db->where('kdUniversitas', $id);
+        $this->db->where('kdPerusahaan', $id);
         return $this->db->delete($this->getTable());
     }
 }
